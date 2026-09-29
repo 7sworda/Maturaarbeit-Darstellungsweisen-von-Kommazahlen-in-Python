@@ -57,7 +57,7 @@ with open('datensatz.csv', newline='') as dataset, open('höchster_speicheraufwa
         float_deviation = deviation(float_result, reference)
         
         setcontext(decimal1_context)
-        a_decimal1 = Decimal(a) + 0 # 0 gets added so that the decimal object gets set to the contexts limit
+        a_decimal1 = Decimal(a) + 0 # Addition with 0 applies the current context precision to the Decimal value
         b_decimal1 = Decimal(b) + 0
         
         decimal1_maxmemory, decimal1_result = trace_memory(a_decimal1, b_decimal1)
