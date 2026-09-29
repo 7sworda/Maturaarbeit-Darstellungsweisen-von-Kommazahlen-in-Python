@@ -8,7 +8,7 @@ from math import isinf, isnan
 def trace_memory(a, b):
     tracemalloc.start()
 
-    c = a + b
+    c = a - b
 
     traced_memory = tracemalloc.get_traced_memory()
     tracemalloc.stop()
@@ -45,7 +45,7 @@ set_int_max_str_digits(131074)
 decimal1_context = Context(prec=16, Emin=-383, Emax=384, traps=[])
 decimal2_context = Context(prec=MAX_PREC, Emin=MIN_EMIN, Emax=MAX_EMAX)
 
-with open('datensatz.csv', newline='') as dataset, open('höchster_speicheraufwand_addition.csv', mode='w', newline='') as maxmemoryfile, open('speicheraufwand_des_resultats_addition.csv', mode='w', newline='') as resultsizefile, open('abweichung_addition.csv', mode='w', newline='') as deviationfile:
+with open('datensatz.csv', newline='') as dataset, open('höchster_speicheraufwand_subtraktion.csv', mode='w', newline='') as maxmemoryfile, open('speicheraufwand_des_resultats_subtraktion.csv', mode='w', newline='') as resultsizefile, open('abweichung_subtraktion.csv', mode='w', newline='') as deviationfile:
     datareader = csv.reader(dataset, dialect='excel', delimiter=';')
     datawriter_maxmemory = csv.writer(maxmemoryfile, dialect='excel', delimiter=';')
     datawriter_resultsize = csv.writer(resultsizefile, dialect='excel', delimiter=';')
@@ -69,7 +69,7 @@ with open('datensatz.csv', newline='') as dataset, open('höchster_speicheraufwa
         float_deviation = deviation(float_result, reference)
         
         setcontext(decimal1_context)
-        a_decimal1 = Decimal(a) + 0 # 0 gets added so that the decimal object gets set to the contexts limit
+        a_decimal1 = Decimal(a) + 0 # Addition with 0 applies the current context precision to the Decimal value
         b_decimal1 = Decimal(b) + 0
         
         decimal1_maxmemory, decimal1_result = trace_memory(a_decimal1, b_decimal1)
