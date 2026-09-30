@@ -33,7 +33,7 @@ def deviation(c, reference):
     if reference == 0 and c != 0:
         return ""
     
-    if c == reference:
+    if Fraction(c) == reference:
         return 0
     
     calculated_deviation = abs(reference - Fraction(c))/abs(reference)
